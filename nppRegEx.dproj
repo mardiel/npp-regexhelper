@@ -96,7 +96,7 @@
         <VerInfo_Release>4</VerInfo_Release>
         <VerInfo_DLL>true</VerInfo_DLL>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=Cool NPP Stuff;FileDescription=$(MSBuildProjectName);FileVersion=0.2.4.0;InternalName=RegEx Helper (x64);LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.2.4.0;Comments=64-bit build</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=NPP Plugin;FileDescription=$(MSBuildProjectName);FileVersion=0.2.4.0;InternalName=RegEx Helper (x64);LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=0.2.4.0;Comments=64-bit build</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>

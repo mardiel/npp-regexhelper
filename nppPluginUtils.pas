@@ -40,11 +40,10 @@ procedure ClearActiveMatch(SciHandle: THandle; RestorePrevious: Boolean);
 procedure ScrollToPosition(SciHandle: THandle; Position: Integer);
 
 implementation
-uses Windows, pcre;
+uses Windows, RegularExpressionsApi;
 
 const
   INVALID_POS = -1;
-  ERR_PCRE_NOT_LOADED = 'PCRE could not be loaded';
 
   INDICATOR_DEFAULT = 1;
   INDICATOR_ALTERNATE = 2;
@@ -80,33 +79,26 @@ var
   Matches: array[0..299] of TMatch; // int array with 600 elements captures 199 sub-patterns
 begin
   Result := nil;
-
-  if not IsPCRELoaded then
-  begin
-    ErrMsg := ERR_PCRE_NOT_LOADED;
-    Exit;
-  end;
-
   BufLength := 2 * Length(Matches);
-  Compiled := pcre_compile(PAnsiChar(APattern), FLAGS, @LibErrMsg, @LibErr, nil);
+  Compiled := pcre_compile(PWideChar(WideString(APattern)), FLAGS, @LibErrMsg, @LibErr, nil);
   if not Assigned(Compiled) then
     ErrMsg := String(LibErrMsg)
   else
     try
       Result := TDetailedMatchList.Create;
-      HasMatch := pcre_exec(Compiled, nil, PAnsiChar(AText), Length(AText), 0, 0, @Matches[0], BufLength);
+      HasMatch := pcre_exec(Compiled, nil, PWideChar(WideString(AText)), Length(AText), 0, 0, @Matches[0], BufLength);
       while HasMatch > 0 do
       begin
         if (Matches[0].StartPos = Matches[0].EndPos) then
         begin
           Inc(Matches[0].EndPos);
           if Matches[0].EndPos >= Length(AText) then Break;
-          HasMatch := pcre_exec(Compiled, nil, PAnsiChar(AText), Length(AText), Matches[0].EndPos, 0, @Matches[0], BufLength);
+          HasMatch := pcre_exec(Compiled, nil, PWideChar(WideString(AText)), Length(AText), Matches[0].EndPos, 0, @Matches[0], BufLength);
         end
         else
         begin
           Result.AddDetailedMatch(PMatchArray(@Matches[0]), HasMatch);
-          HasMatch := pcre_exec(Compiled, nil, PAnsiChar(AText), Length(AText), Matches[0].EndPos, 0, @Matches[0], BufLength);
+          HasMatch := pcre_exec(Compiled, nil, PWideChar(WideString(AText)), Length(AText), Matches[0].EndPos, 0, @Matches[0], BufLength);
         end;
       end;
     finally
@@ -174,9 +166,9 @@ var
   B: Boolean;
 begin
   SendMessage(SciHandle, SCI_INDICSETSTYLE, INDICATOR_DEFAULT, INDIC_ROUNDBOX);
-  SendMessage(SciHandle, SCI_INDICSETFORE, INDICATOR_DEFAULT, $FF1111);
+  SendMessage(SciHandle, SCI_INDICSETFORE, INDICATOR_DEFAULT, $FF00FF);
   SendMessage(SciHandle, SCI_INDICSETSTYLE, INDICATOR_ALTERNATE, INDIC_ROUNDBOX);
-  SendMessage(SciHandle, SCI_INDICSETFORE, INDICATOR_ALTERNATE, $1111FF);
+  SendMessage(SciHandle, SCI_INDICSETFORE, INDICATOR_ALTERNATE, $00FF00);
 
   B := false;
   for Match in MatchList.Matches do
@@ -258,9 +250,7 @@ begin
 end;
 
 initialization
-  LoadPCRE;
 
 finalization
-  UnloadPCRE;
 
 end.

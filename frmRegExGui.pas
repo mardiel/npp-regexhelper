@@ -22,6 +22,8 @@ type
     mSubMatches: TMemo;
     Label4: TLabel;
     pEditor: TPanel;
+    Panel1: TPanel;
+    Label5: TLabel;
     procedure bMatchClick(Sender: TObject);
     procedure bClearClick(Sender: TObject);
     procedure FormHide(Sender: TObject);

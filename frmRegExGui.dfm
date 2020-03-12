@@ -2,7 +2,7 @@ object RegExGui: TRegExGui
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = 'RegEx Helper'
+  Caption = 'RegEx Helper (x64)'
   ClientHeight = 474
   ClientWidth = 566
   Color = clBtnFace
@@ -21,16 +21,6 @@ object RegExGui: TRegExGui
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
-    AlignWithMargins = True
-    Left = 7
-    Top = 7
-    Width = 552
-    Height = 13
-    Align = alTop
-    Caption = 'Regular Expression (line breaks ignored)'
-    ExplicitWidth = 193
-  end
   object pButtons: TPanel
     Left = 4
     Top = 449
@@ -44,12 +34,13 @@ object RegExGui: TRegExGui
       Left = 472
       Top = 6
       Width = 47
-      Height = 13
+      Height = 17
       Margins.Top = 6
       Margins.Right = 0
       Margins.Bottom = 2
       Align = alRight
       Caption = 'Matches: '
+      ExplicitHeight = 13
     end
     object bMatch: TButton
       AlignWithMargins = True
@@ -88,7 +79,7 @@ object RegExGui: TRegExGui
       Left = 520
       Top = 4
       Width = 35
-      Height = 19
+      Height = 17
       Margins.Left = 1
       Margins.Top = 4
       Margins.Bottom = 4
@@ -99,6 +90,7 @@ object RegExGui: TRegExGui
       ReadOnly = True
       TabOrder = 2
       Text = '-'
+      ExplicitHeight = 19
     end
     object cbIgnoreSpaces: TCheckBox
       AlignWithMargins = True
@@ -139,19 +131,21 @@ object RegExGui: TRegExGui
       AlignWithMargins = True
       Left = 3
       Top = 3
-      Width = 40
+      Width = 552
       Height = 13
       Align = alTop
       Caption = 'Matches'
+      ExplicitWidth = 40
     end
     object Label4: TLabel
       AlignWithMargins = True
       Left = 3
       Top = 129
-      Width = 281
+      Width = 552
       Height = 13
       Align = alTop
       Caption = 'Sub-Matches (last match shown for repeated subpatterns)'
+      ExplicitWidth = 281
     end
     object lbMatches: TListBox
       Left = 0
@@ -178,11 +172,42 @@ object RegExGui: TRegExGui
   end
   object pEditor: TPanel
     Left = 4
-    Top = 23
+    Top = 25
     Width = 558
-    Height = 146
+    Height = 144
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
+  end
+  object Panel1: TPanel
+    Left = 4
+    Top = 4
+    Width = 558
+    Height = 21
+    Align = alTop
+    BevelOuter = bvNone
+    Caption = 'Panel1'
+    ShowCaption = False
+    TabOrder = 3
+    object Label1: TLabel
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 193
+      Height = 15
+      Align = alLeft
+      Caption = 'Regular Expression (line breaks ignored)'
+      ExplicitHeight = 13
+    end
+    object Label5: TLabel
+      AlignWithMargins = True
+      Left = 523
+      Top = 3
+      Width = 32
+      Height = 15
+      Align = alRight
+      Caption = 'v0.2.4'
+      ExplicitHeight = 13
+    end
   end
 end

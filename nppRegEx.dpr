@@ -9,6 +9,8 @@ uses
   frmRegExGui in 'frmRegExGui.pas' {RegExGui},
   nppPluginUtils in 'nppPluginUtils.pas';
 
+{$R *.res}
+
 var
   Functions: Array of TFuncItem;
   LaunchKey: TShortcutKey;
@@ -21,7 +23,7 @@ end;
 
 function getName(): nppPchar; cdecl; export;
 begin
-  Result := 'RegEx Helper';
+  Result := 'RegEx Helper (x64)';
 end;
 
 function isUnicode : Boolean; cdecl; export;
